@@ -1,55 +1,39 @@
-function createOrderedList(){
-let ol = document.createElement('ol');
-// console.log(ol);
-return ol;
+function createOrderedList() {
+  let ol = document.createElement('ol');
+  ol.setAttribute('id', 'order-list');
+  let orderList = document.body.appendChild(ol);
+  return orderList;
 }
 
-// createOrderedList();
-
-function createListItem(){
+function createListItem() {
   let li = document.createElement('li');
-  // console.log(li);
   return li;
 }
 
-// createListItem();
-
-function appendListItemToOrderedList(){
-  let orderList = createOrderedList();
-  let listItem = createListItem();
-  let appendListItem = orderList.appendChild(listItem);
-  console.log(appendListItem);
-  // return childListItem;
+function createTextAreaTextNode() {
+  let textArea = document.getElementById('type-notes');
+  let textAreaValue = textArea.value;
+  let textAreaNode = document.createTextNode(textAreaValue);
+  return textAreaNode;
 }
 
-appendListItemToOrderedList();
+//append textAreaNode to listItem
 
-// let textArea = document.getElementById('type-notes');
-// // console.log(textArea);
+function appendTextAreaNodeToListItem() {
+  let listItem = createListItem();
+  let textNode = createTextAreaTextNode();
+  let appendNodeToList = listItem.appendChild(textNode);
+  return appendNodeToList;
+}
 
-// function appendTextAreaToListItem(){
-//   let listItem = createListItem();
-//   let appendTextArea = textArea.appendChild(listItem);
-//   // console.log(appendTextArea);
-//   return appendTextArea;
-// }
+function appendListItemToOrderList() {
+  let orderList = createOrderedList();
+  let nodeListItem = appendTextAreaNodeToListItem();
+  let appendListItemToOrderList = orderList.appendChild(nodeListItem);
+  console.log(appendListItemToOrderList);
+  return appendListItemToOrderList;
+}
 
-// // appendTextAreaToListItem();
-
-// function appendListItemToOrderedList(){
-//   let appendTextAreaListItem = appendTextAreaToListItem();
-//   let orderedList = createOrderedList();
-//   let appendListItemToOrderedList = orderedList.appendChild(appendTextAreaListItem);
-//   // console.log(appendListItemToOrderedList);
-//   return appendListItemToOrderedList;
-// }
-
-// // appendListItemToOrderedList();
-
-// let createNote = document.getElementById('create-note');
-
-// createNote.addEventListener('click', (e) => {
-// let x = appendListItemToOrderedList();
-// console.log(x);
-// });
-
+document.getElementById('create-note').addEventListener('click', (e) => {
+appendListItemToOrderList();
+});
