@@ -5,17 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Note Taking Application</title>
+
+  <link rel="stylesheet" href="stylesheet.css">
 </head>
 
 <body>
 
   <h2>Note Taking App</h2>
 
-  <form>
-    <label for="type-notes">Enter notes here</label>
-    <textarea name="notes" id="type-notes" cols="35" rows="5" placeholder="Create Notes..." required></textarea>
+  <form class="text-box">
+    <label for="type-notes">Enter your notes here</label>
+    <textarea name="notes" id="type-notes" cols="25" rows="5" required></textarea>
     <button id="create-note">Create Note</button>
   </form>
+
+  <ul id="notes-list">
+    <li id="date-time">No notes created yet!</li>
+    <li id="note-type">create your first note above!</li>
+  </ul>
 
   <script src="script.js"></script>
 </body>
