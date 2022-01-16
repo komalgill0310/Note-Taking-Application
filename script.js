@@ -1,77 +1,49 @@
-const dateTimeListItem = document.querySelector('#date-time');
-console.log('DateTimeListItem: ', dateTimeListItem);
+document.getElementById('create-note').addEventListener('click', (e) => {
+appendListItemToOrderList();
+});
 
-let typeNotesListItem = document.querySelector('#note-type');
-console.log('TypeNotesListItem: ', typeNotesListItem);
-
-function getCurrentDate() {
-  const d = new Date();
-  let month = d.getMonth() + 1;
-  let date = month + '/' + d.getDate() + '/' + d.getFullYear();
-  console.log('Date: ', date);
-  return date;
+//output: <ol id='order-list'></ol>
+function createOrderedList() {
+  let ol = document.createElement('ol');
+  ol.setAttribute('id', 'order-list');
+  let orderList = document.body.appendChild(ol);
+  return orderList;
 }
 
-function getCurrentHour() {
-  const d = new Date();
-  let h = d.getHours();
-  if (h === 0) {
-    h = 12;
-  }
-  else if (h > 12) {
-    h = h - 12;
-  }
-  else {
-    h = h;
-  }
-  // console.log(h);
-  return h;
+//output: <li></li>
+function createListItem() {
+  let li = document.createElement('li');
+  return li;
 }
 
-function getCurrentMinute() {
-  const d = new Date();
-  let min = d.getMinutes();
-  if (min < 10) {
-    min = `0${min}`;
-  }
-  else {
-    min = `${min}`;
-  }
-  // console.log(min);
-  return min;
+//output: will create a string for the entered text in textArea box
+function createTextAreaTextNode() {
+  let textArea = document.getElementById('type-notes');
+  let textAreaValue = textArea.value;
+  let textAreaNode = document.createTextNode(textAreaValue);
+  return textAreaNode;
 }
 
-function getCurrentSecond() {
-  const d = new Date();
-  let sec = d.getSeconds();
-  if (sec < 10) {
-    sec = `0${sec}`;
-  }
-  else {
-    sec = `${sec}`;
-  }
-  // console.log(sec);
-  return sec;
+//output: <li>text entered by user</li>
+function appendTextAreaNodeToListItem() {
+  let listItem = createListItem();
+  let textNode = createTextAreaTextNode();
+  let appendNodeToList = listItem.appendChild(textNode);
+  return appendNodeToList;
 }
 
-function getCurrentTime() {
-  const d = new Date();
-  let hour = getCurrentHour();
-  let minute = getCurrentMinute();
-  let second = getCurrentSecond();
-  let currentTime;
-  if (hour < 12) {
-    currentTime = hour + ':' + minute + ':' + second + ' AM';
-  }
-  else {
-    currentTime = hour + ':' + minute + ':' + second + ' PM';
-  }
-  console.log('Current Time: ', currentTime);
-  return currentTime;
+// output: <ol>
+//           <li>text entered by user</li>
+//         </ol> 
+function appendListItemToOrderList() {
+  let orderList = createOrderedList();
+  let nodeListItem = appendTextAreaNodeToListItem();
+  let appendTextNodeListItemToOrderList = orderList.appendChild(nodeListItem);
+  console.log('appendTextNodeListItemToOrderList: ', appendTextNodeListItemToOrderList);
+  return appendTextNodeListItemToOrderList;
 }
 
-dateTimeListItem.textContent = getCurrentDate() + ', ' + getCurrentTime();
-console.log('DateTimeListItem text: ', dateTimeListItem.textContent);
+//Please Ignore the commented code written below
 
 
 
@@ -82,39 +54,82 @@ console.log('DateTimeListItem text: ', dateTimeListItem.textContent);
 
 
 
-// function updateDateTimeList() {
-//   dateTimeListItem.textContent = getCurrentDate() + ', ' + getCurrentTime();
-//   console.log('DateTimeListItem"s text: ', dateTimeListItem.textContent);
-// }
 
-// let textBox = document.getElementById('type-notes');
 
-// document.querySelector('#create-note').addEventListener('click', (e) => {
-//   // if (textBox.value === '') {
-//   //   return;
-//   // }
-//   // else {
-//   updateDateTimeList();
-//   updateNotes();
-//   // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // let textBox = document.getElementById('type-notes');
+// let ol = document.getElementById('order-list');
+
+// document.getElementById('create-note').addEventListener('click', (e) => {
+// //   if (textBox.value === '') {
+// //     return;
+// //   }
+// //   else {
+// //     appendDateListItemToOrderList();
+// //     addTimeListToOrderList();
+// //     appendListItemToOrderList();
+// //     // appendTimeToListItem();
+// //     // appendDateToListItem();
+// appendListItemToOrderList();
+// //     resetTextArea();
+// //   }
 // });
 
-
-
-
-
-
-// function createOrderedList() {
-//   let ol = document.createElement('ol');
-//   ol.setAttribute('id', 'order-list');
-//   let orderList = document.body.appendChild(ol);
-//   return orderList;
-// }
+// // function createOrderedList() {
+// //   let ol = document.createElement('ol');
+// //   ol.setAttribute('id', 'order-list');
+// //   let orderList = document.body.appendChild(ol);
+// //   return orderList;
+// // }
 
 // function createListItem() {
 //   let li = document.createElement('li');
 //   return li;
 // }
+
+// // function appendListItemToOrderList() {
+// //   let orderList = createOrderedList();
+// //   let list = createListItem();
+// //   let addListToOrderList = orderList.appendChild(list);
+// //   console.log('childList: ');
+// //   return addListToOrderList;
+// // }
+
+// // let listToOrderList = appendListItemToOrderList();
 
 // function createTextAreaTextNode() {
 //   let textArea = document.getElementById('type-notes');
@@ -125,16 +140,20 @@ console.log('DateTimeListItem text: ', dateTimeListItem.textContent);
 
 // function appendTextAreaNodeToListItem() {
 //   let listItem = createListItem();
+//   // let listItem = appendListItemToOrderList();
 //   let textNode = createTextAreaTextNode();
 //   let appendNodeToList = listItem.appendChild(textNode);
+//   // let appendNodeToList = listToOrderList.appendChild(textNode);
+//   // console.log('appendNodeToList: ', appendNodeToList);
 //   return appendNodeToList;
 // }
 
 // function appendListItemToOrderList() {
-//   let orderList = createOrderedList();
+//   // let orderList = createOrderedList();
 //   let nodeListItem = appendTextAreaNodeToListItem();
-//   let appendListItemToOrderList = orderList.appendChild(nodeListItem);
-//   // console.log(appendListItemToOrderList);
+//   // let appendListItemToOrderList = listToOrderList.appendChild(nodeListItem);
+//   let appendListItemToOrderList = ol.appendChild(nodeListItem);
+//   console.log('appendListItemToOrderList: ', appendListItemToOrderList);
 //   return appendListItemToOrderList;
 // }
 
@@ -155,17 +174,19 @@ console.log('DateTimeListItem text: ', dateTimeListItem.textContent);
 
 // function appendDateToListItem() {
 //   let itemList = createListItem();
+//   // let itemList = appendListItemToOrderList();
 //   let currentDate = createDateTextNode();
 //   let appendDateToItemList = itemList.appendChild(currentDate);
-//   // console.log(appendDateToItemList);
+//   // let appendDateToItemList = listToOrderList.appendChild(currentDate);
+//   // console.log('appendDateToItemList: ', appendDateToItemList);
 //   return appendDateToItemList;
 // }
 
 // function appendDateListItemToOrderList() {
-//   let orderedList = createOrderedList();
+//   // let orderedList = createOrderedList();
 //   let dateListItem = appendDateToListItem();
-//   let appendDateListToOrderList = orderedList.appendChild(dateListItem);
-//   // console.log(appendDateListToOrderList);
+//   let appendDateListToOrderList = listToOrderList.appendChild(dateListItem);
+//   console.log('appendDateListToOrderList: ', appendDateListToOrderList);
 //   return appendDateListToOrderList;
 // }
 
@@ -175,7 +196,7 @@ console.log('DateTimeListItem text: ', dateTimeListItem.textContent);
 //   if (h === 0) {
 //     h = 12;
 //   }
-//   else if(h>12){
+//   else if (h > 12) {
 //     h = h - 12;
 //   }
 //   else {
@@ -241,37 +262,28 @@ console.log('DateTimeListItem text: ', dateTimeListItem.textContent);
 
 // function appendTimeToListItem() {
 //   let list = createListItem();
+//   // let list = appendListItemToOrderList();
+  
 //   let timeNode = createTimeTextNode();
 //   let addTimeToList = list.appendChild(timeNode);
-//   // console.log(addTimeToList);
+//   // let addTimeToList = listToOrderList.appendChild(timeNode);
+//   // console.log('addTimeToList: ', addTimeToList);
 //   return addTimeToList;
 // }
 
 // function addTimeListToOrderList() {
-//   let listOfOrder = createOrderedList();
+//   // let listOfOrder = createOrderedList();
 //   let timeList = appendTimeToListItem();
 //   let addListTimeToOrderList = listOfOrder.appendChild(timeList);
-//   console.log(addListTimeToOrderList);
+//   console.log('addListTimeToOrderList: ', addListTimeToOrderList);
 //   return addListTimeToOrderList;
 // }
-// let textBox = document.getElementById('type-notes');
+
 // function resetTextArea() {
 //   // let textBox = document.getElementById('type-notes');
 //   textBox.value = '';
 //   return textBox;
 // }
 
-// document.getElementById('create-note').addEventListener('click', (e) => {
-//   if(textBox.value === ''){
-//    return;
-//   }
-//   else{
-//     // let x = appendDateListItemToOrderList() + ', ' + addTimeListToOrderList();
-//     // console.log(x);
-//   appendDateListItemToOrderList();
-//   addTimeListToOrderList();
-//   appendListItemToOrderList();
-//   resetTextArea();
-//   }
-// });
+
 

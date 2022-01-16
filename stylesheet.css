@@ -44,11 +44,11 @@ textarea{
   margin: 7px 5px 2px;
 }
 
-#notes-list{
+/* #order-list{
   list-style-type: none;
-  /* border: 1px solid rgb(129 126 126 / 40%); */
-  /* border-radius: 9px; */
+  border: 1px solid rgb(129 126 126 / 40%);
+   border-radius: 9px;
   margin: 0px 87px;
  padding: 20px;
  height: 14%;
-}
+} */
