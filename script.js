@@ -1,7 +1,7 @@
-document.getElementById('create-note').addEventListener('click', (e) => {
+document.getElementById("create-note").addEventListener("click", (e) => {
   e.preventDefault();
   if (document.getElementById("type-notes").value === "") {
-    alert("Please Fill out this Field!");
+    alert("Please Click on CREATE NOTE Button to enter your note in the text field!");
     return;
   }
   appendDateTimeTextToDivElement();
@@ -13,12 +13,13 @@ function appendDateTimeTextToDivElement() {
   const date = addDateToParaElement();
   const time = addTimeToParaElement();
   const text = addTextToParaElement();
-  return document.getElementById("date-time-text-container").appendChild(div).append(date, time, text);
+  const deleteDiv =deleteNote();
+  return document.getElementById("date-time-text-container").appendChild(div).append(date, time, text, deleteDiv);
 }
 
 function createDivElement() {
   const div = document.createElement("div");
-  div.setAttribute("class", "div")
+  div.setAttribute("class", "child-of-date-time-text-container")
   return div;
 }
 
@@ -50,17 +51,19 @@ function getTime() {
   let hour = timeObject.getHours();
   let minute = timeObject.getMinutes().toString().padStart(2, 0);
   let second = timeObject.getSeconds().toString().padStart(2, 0);
+  let amPm =  hour >= 12? "PM":"AM";
   if (hour === 0) {
-    return `${hour = 12}:${minute}:${second} AM`;
+    return `${hour = 12}:${minute}:${second} ${amPm}`;
   }
   if (hour > 12) {
-    return `${hour - 12}:${minute}:${second} PM`;
+    return `${hour - 12}:${minute}:${second} ${amPm}`;
   }
-  return `${hour}:${minute}:${second} AM`;
+  return `${hour}:${minute}:${second} ${amPm}`;
 }
 
 function addTextToParaElement() {
   const paraElement = createParagraphElement();
+  paraElement.setAttribute("class", "text");
   paraElement.textContent = document.getElementById('type-notes').value;;
   return paraElement;
 }
@@ -71,20 +74,18 @@ function resetTextBox() {
   return textBox;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//could not figure out: How to create seperate function for deleting the parent Div, when clicked on Delete Button?
+function deleteNote() {
+  const deleteElement = document.createElement("button");
+  deleteElement.setAttribute("id", "delete-note");
+  deleteElement.innerHTML = "X";
+  deleteElement.addEventListener("click", (e) => {
+    if (e.target.parentElement.classList.contains("child-of-date-time-text-container")) {
+      e.target.parentElement.remove();
+    }
+  });
+  return deleteElement;
+}
 
 
 

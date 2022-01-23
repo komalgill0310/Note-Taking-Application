@@ -28,6 +28,7 @@ outline-color: #065fd4;
   border-radius: 5px;
   border: 0;
   resize: vertical;
+  font-size: 17px;
 }
 
 #create-note{
@@ -42,32 +43,53 @@ outline-color: #065fd4;
 
 #create-note:hover{
 background-color: #004369;
+cursor: pointer;
 }
 
-.div{
+.child-of-date-time-text-container{
   border: 1px solid rgb(129 126 126 / 40%);
-  flex-direction: column;
-  margin-top: 0px;
-  height: 115px;
+  height: auto;
   padding-left: 11px;
   border-radius: 9px;
   margin: 0px 89px;
+  white-space: pre-wrap;
+  font-size: 17px;  
+  align-items: center;
 }
 
 .date{
   float: left;
   padding-left: 5px;
+  font-weight: bolder;
+  font-size: large;
 }
 
 .date::after{
-  content: ", ";
+  content: ",  ";
 }
 
 .time{
-  text-indent: 12px;
+  font-weight: bolder;
+  font-size: large; 
 }
 
+.text{
+  float: inline-end;
+  padding-left: 7px;
+}
 
+#delete-note{
+  display: flex;
+  margin-left:auto;
+  background-color: red;
+  color: white;
+  font-size: large;
+  font-weight: bolder;
+  border-radius: 17px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
 
 
 
