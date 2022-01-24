@@ -2,7 +2,7 @@
 
 <font size = 6> This application is simply written in ***JavaScript, HTML and CSS***</font>
 
-<font size=5> Working Version ***[here](Demo_Note_Taking_App.gif)***</font>
+<font size=5> Working Version ***[here]()***</font>
 
 <img src = "Note taking app screenshot.png">
 
