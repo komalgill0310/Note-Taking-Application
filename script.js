@@ -1,7 +1,7 @@
 document.getElementById("create-note").addEventListener("click", (e) => {
   e.preventDefault();
   if (document.getElementById("type-notes").value === "") {
-    alert("Please Click on CREATE NOTE Button to enter your note in the text field!");
+    alert("Please Click inside the text Box to enter your note in the text field!");
     return;
   }
   appendDateTimeTextToDivElement();
