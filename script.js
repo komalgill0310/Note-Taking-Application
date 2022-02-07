@@ -1,25 +1,43 @@
 document.getElementById("create-note").addEventListener("click", (e) => {
   e.preventDefault();
-  if (document.getElementById("type-notes").value === "") {
-    alert("Please Click inside the text Box to enter your note in the text field!");
-    return;
+  let textBoxValue = document.getElementById("type-notes").value;
+  const notes = {
+    id: Date.now(),
+    date: getCurrentDate(),
+    time: getTime(),
+    textNote: textBoxValue
+  };
+  if (isTextBoxEmpty(textBoxValue)) {
+    alert("Please enter some notes");
+  } else {
+    addNote(notes);
+    resetTextBox();
   }
-  appendDateTimeTextToDivElement();
-  resetTextBox();
 });
 
-function appendDateTimeTextToDivElement() {
+function isTextBoxEmpty(textBoxValue) {
+  return textBoxValue === "" ? true : false;
+}
+
+function addNote(notes) {
+  displayNote(notes);
+  notesArray = getNotesFromLocalStorage();
+  notesArray.push(notes);
+  addNotesToLocalStorage(notesArray);
+}
+
+function displayNote(notes) {
   const div = createDivElement();
-  const date = addDateToParaElement();
-  const time = addTimeToParaElement();
-  const text = addTextToParaElement();
-  const deleteDiv =deleteNote();
+  const date = addDateToParaElement(notes);
+  const time = addTimeToParaElement(notes);
+  const text = addTextToParaElement(notes);
+  const deleteDiv = createDeleteButton(notes);
   return document.getElementById("date-time-text-container").appendChild(div).append(date, time, text, deleteDiv);
 }
 
 function createDivElement() {
   const div = document.createElement("div");
-  div.setAttribute("class", "child-of-date-time-text-container")
+  div.className = "child-of-date-time-text-container";
   return div;
 }
 
@@ -27,10 +45,10 @@ function createParagraphElement() {
   return document.createElement("p");
 }
 
-function addDateToParaElement() {
+function addDateToParaElement(notes) {
   const para = createParagraphElement();
-  para.setAttribute("class", "date");
-  para.textContent = getCurrentDate();
+  para.className = "date";
+  para.textContent = notes.date;
   return para;
 }
 
@@ -39,10 +57,10 @@ function getCurrentDate() {
   return `${(dateObject.getMonth() + 1)}/${dateObject.getDate()}/${dateObject.getFullYear()}`;
 }
 
-function addTimeToParaElement() {
+function addTimeToParaElement(notes) {
   const paraTag = createParagraphElement();
-  paraTag.setAttribute("class", "time");
-  paraTag.textContent = getTime();
+  paraTag.className = "time";
+  paraTag.textContent = notes.time;
   return paraTag;
 }
 
@@ -51,7 +69,7 @@ function getTime() {
   let hour = timeObject.getHours();
   let minute = timeObject.getMinutes().toString().padStart(2, 0);
   let second = timeObject.getSeconds().toString().padStart(2, 0);
-  let amPm =  hour >= 12? "PM":"AM";
+  let amPm = hour >= 12 ? "PM" : "AM";
   if (hour === 0) {
     return `${hour = 12}:${minute}:${second} ${amPm}`;
   }
@@ -61,36 +79,45 @@ function getTime() {
   return `${hour}:${minute}:${second} ${amPm}`;
 }
 
-function addTextToParaElement() {
+function addTextToParaElement(notes) {
   const paraElement = createParagraphElement();
-  paraElement.setAttribute("class", "text");
-  paraElement.textContent = document.getElementById('type-notes').value;;
+  paraElement.className = "text";
+  paraElement.textContent = notes.textNote;
   return paraElement;
 }
 
 function resetTextBox() {
-  const textBox = document.getElementById("type-notes");
-  textBox.value = "";
-  return textBox;
+  document.getElementById("type-notes").value = "";
 }
 
-//could not figure out: How to create seperate function for deleting the parent Div, when clicked on Delete Button?
-function deleteNote() {
+function createDeleteButton(notes) {
   const deleteElement = document.createElement("button");
-  deleteElement.setAttribute("id", "delete-note");
+  deleteElement.id = "delete-note";
   deleteElement.innerHTML = "X";
-  deleteElement.addEventListener("click", (e) => {
-    if (e.target.parentElement.classList.contains("child-of-date-time-text-container")) {
-      e.target.parentElement.remove();
-    }
-  });
+  deleteElement.onclick = (e) =>{
+    e.preventDefault();
+    deleteNote(deleteElement, notes.id);
+  }
   return deleteElement;
 }
 
+function deleteNote(deleteElement, id) {
+  deleteElement.parentElement.remove();
+  notesArray = getNotesFromLocalStorage();
+  //not deleting the value from the local storage
+  notesArray = notesArray.filter((deleteElement) => {
+    // console.log(deleteElement.id !== id);
+    return deleteElement.id !== id;
+  });
+}
 
+function addNotesToLocalStorage(notes) {
+  localStorage.setItem("note: ", JSON.stringify(notes));
+}
 
-
-
+function getNotesFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("note")) || [];
+}
 
 
 
