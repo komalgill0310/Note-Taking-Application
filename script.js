@@ -112,7 +112,7 @@ function deleteNote(deleteElement, id) {
 }
 
 function addNotesToLocalStorage(notes) {
-  localStorage.setItem("note: ", JSON.stringify(notes));
+  localStorage.setItem("note", JSON.stringify(notes));
 }
 
 function getNotesFromLocalStorage() {
