@@ -1,4 +1,7 @@
-document.getElementById("create-note").addEventListener("click", (e) => {
+initializeInputForm();
+
+function initializeInputForm(){
+  document.getElementById("create-note").addEventListener("click", (e) => {
   e.preventDefault();
   let textBoxValue = document.getElementById("type-notes").value;
   const notes = {
@@ -14,6 +17,7 @@ document.getElementById("create-note").addEventListener("click", (e) => {
     resetTextBox();
   }
 });
+}
 
 function isTextBoxEmpty(textBoxValue) {
   return textBoxValue === "" ? true : false;
@@ -21,16 +25,16 @@ function isTextBoxEmpty(textBoxValue) {
 
 function addNote(notes) {
   displayNote(notes);
-  notesArray = getNotesFromLocalStorage();
+  let notesArray = getNotesFromLocalStorage();
   notesArray.push(notes);
   addNotesToLocalStorage(notesArray);
 }
 
 function displayNote(notes) {
   const div = createDivElement();
-  const date = addDateToParaElement(notes);
-  const time = addTimeToParaElement(notes);
-  const text = addTextToParaElement(notes);
+  const date = createDateElement(notes);
+  const time = createTimeElement(notes);
+  const text = createTextElement(notes);
   const deleteDiv = createDeleteButton(notes);
   return document.getElementById("date-time-text-container").appendChild(div).append(date, time, text, deleteDiv);
 }
@@ -45,7 +49,7 @@ function createParagraphElement() {
   return document.createElement("p");
 }
 
-function addDateToParaElement(notes) {
+function createDateElement(notes) {
   const para = createParagraphElement();
   para.className = "date";
   para.textContent = notes.date;
@@ -57,7 +61,7 @@ function getCurrentDate() {
   return `${(dateObject.getMonth() + 1)}/${dateObject.getDate()}/${dateObject.getFullYear()}`;
 }
 
-function addTimeToParaElement(notes) {
+function createTimeElement(notes) {
   const paraTag = createParagraphElement();
   paraTag.className = "time";
   paraTag.textContent = notes.time;
@@ -79,7 +83,7 @@ function getTime() {
   return `${hour}:${minute}:${second} ${amPm}`;
 }
 
-function addTextToParaElement(notes) {
+function createTextElement(notes) {
   const paraElement = createParagraphElement();
   paraElement.className = "text";
   paraElement.textContent = notes.textNote;
@@ -103,12 +107,11 @@ function createDeleteButton(notes) {
 
 function deleteNote(deleteElement, id) {
   deleteElement.parentElement.remove();
-  notesArray = getNotesFromLocalStorage();
-  //not deleting the value from the local storage
+  let notesArray = getNotesFromLocalStorage();
   notesArray = notesArray.filter((deleteElement) => {
-    // console.log(deleteElement.id !== id);
     return deleteElement.id !== id;
   });
+  addNotesToLocalStorage(notesArray);
 }
 
 function addNotesToLocalStorage(notes) {
@@ -119,7 +122,13 @@ function getNotesFromLocalStorage() {
   return JSON.parse(localStorage.getItem("note")) || [];
 }
 
-
+window.onload = (e) => {
+  e.preventDefault();
+  let notesArray = getNotesFromLocalStorage();
+  notesArray.forEach((notes) => {
+    displayNote(notes);
+  });
+}
 
 
 
