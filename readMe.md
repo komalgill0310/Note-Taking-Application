@@ -22,4 +22,5 @@
   * AddEventListener
 
 # Author
-<font size=5>Komal - | Software Developer | [Note Taking App](https://komalgill0310.github.io/Note-taking-Application/) | [LinkedIn](https://www.linkedin.com/in/komalpreet-kaur-3b6924177/)
+
+Komal | Software Developer | [Portfolio](https://kaurkomal.com/) | [LinkedIn](https://www.linkedin.com/in/hssa03/)
